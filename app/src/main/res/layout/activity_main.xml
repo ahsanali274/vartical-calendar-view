@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.ahsanali.varticalcalendarview.VerticalCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:dayHeight="48dp"
+            app:dayWidth="48dp"
+            app:eventCircleColor="#DB3A43"
+            app:monthDividerSize="16dp"
+            app:monthLabelHeight="24dp"
+            app:monthLabelSize="16sp"
+            app:monthLabelColor="#1919E4"
+            app:todayCircleColor="@color/colorPrimary"
+            app:todayCircleSize="30dp"
+            app:weekdayNameLabelColor="#1919E4"
+            app:weekdayNameHeight="32dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal"/>
+
+</android.support.constraint.ConstraintLayout>

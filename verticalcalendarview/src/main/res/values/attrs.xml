@@ -1,0 +1,30 @@
+<resources>
+    <declare-styleable name="VerticalCalendarView">
+
+
+        <!-- Month Label Attrs -->
+        <attr name="monthLabelPadding" format="dimension"/>
+        <attr name="monthLabelPaddingTop" format="dimension"/>
+        <attr name="monthLabelPaddingTopBottom" format="dimension"/>
+        <attr name="monthLabelPaddingTopStart" format="dimension"/>
+        <attr name="monthLabelPaddingTopEnd" format="dimension"/>
+        <attr name="monthLabelHeight" format="dimension"/>
+        <attr name="monthLabelSize" format="dimension"/>
+        <attr name="monthLabelColor" format="color|reference"/>
+
+        <attr name="monthDividerSize" format="dimension"/>
+
+        <!-- Weekrow attrs -->
+        <attr name="dayHeight" format="dimension"/>
+        <attr name="dayWidth" format="dimension"/>
+
+
+        <attr name="todayCircleSize" format="dimension"/>
+        <attr name="todayCircleColor" format="color|reference"/>
+        <attr name="eventCircleColor" format="color|reference"/>
+
+        <attr name="weekdayNameHeight" format="dimension"/>
+        <attr name="weekdayNameLabelColor" format="color|reference"/>
+
+    </declare-styleable>
+</resources>
