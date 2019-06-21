@@ -27,10 +27,6 @@ dependencies {
     implementation rootProject.ext.kotlin
     implementation rootProject.ext.supportAppCompat
     implementation rootProject.ext.recyclerviewV7
-
-    testImplementation rootProject.ext.junit
-    androidTestImplementation rootProject.ext.testRunner
-    androidTestImplementation rootProject.ext.espresso
 }
 repositories {
     mavenCentral()

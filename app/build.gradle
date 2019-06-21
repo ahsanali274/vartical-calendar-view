@@ -27,9 +27,5 @@ dependencies {
     implementation rootProject.ext.supportAppCompat
     implementation rootProject.ext.supportDesign
 
-    testImplementation rootProject.ext.junit
-    androidTestImplementation rootProject.ext.testRunner
-    androidTestImplementation rootProject.ext.espresso
-
     implementation project(':verticalcalendarview')
 }
