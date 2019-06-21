@@ -113,7 +113,7 @@ class VerticalCalendarAdapter(
                 viewCircle = weekColumns[j]?.viewEventCircle
                 container = weekColumns[j]?.container
                 tvDay = weekColumns[j]?.tvvalue
-                tvDay?.text = "" + days[j].value
+                tvDay?.text = days[j].value.toString()
 
                 container?.tag = days[j].value
                 container?.isClickable = days[j].value != 0
@@ -124,7 +124,7 @@ class VerticalCalendarAdapter(
                     tvDay?.setTextColor(Color.WHITE)
                     weekColumns[j]?.viewTodayCircle?.visibility = VISIBLE
                 } else {
-                    tvDay?.setTextColor(if (days[j].value == 0) Color.TRANSPARENT else Color.BLACK)
+                    tvDay?.visibility = if (days[j].value == 0) INVISIBLE else VISIBLE
                     weekColumns[j]?.viewTodayCircle?.visibility = GONE
                 }
             }
