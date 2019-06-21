@@ -16,8 +16,10 @@ import com.ahsanali.varticalcalendarview.data.Month
 import com.ahsanali.varticalcalendarview.holders.MonthViewHolder
 import java.util.*
 
-class VerticalCalendarAdapter(private val mContext: Context,
-                              private val attrs: VerticalCalendarView.Attributes) :
+class VerticalCalendarAdapter(
+    private val mContext: Context,
+    private val attrs: VerticalCalendarView.Attributes
+) :
     RecyclerView.Adapter<MonthViewHolder>() {
 
     private val mMonthLabels: List<String> = listOf(*mContext.resources.getStringArray(R.array.months))
@@ -95,8 +97,7 @@ class VerticalCalendarAdapter(private val mContext: Context,
     }
 
     private fun setLabel(holder: MonthViewHolder, m: Month) {
-        holder.label_month.setText(mMonthLabels[m.value - 1] + " " + m.year)
-        holder.label_month.setTextSize(TypedValue.COMPLEX_UNIT_PX, attrs.monthLabelSize)
+        holder.label_month.text = mMonthLabels[m.value - 1] + " " + m.year
     }
 
     private fun setWeeks(holder: MonthViewHolder, m: Month) {

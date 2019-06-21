@@ -13,9 +13,11 @@ import com.ahsanali.varticalcalendarview.VerticalCalendarView
 import java.util.*
 
 class MonthViewHolder(
-    itemView: View, var weekRowsCount: Int, private val attrs: VerticalCalendarView.Attributes,
+    itemView: View, var weekRowsCount: Int,
+    private val attrs: VerticalCalendarView.Attributes,
     private val mOnDayClickListener: VerticalCalendarView.OnDayClickListener
 ) : RecyclerView.ViewHolder(itemView) {
+
     private val mContext: Context
     private val weeks_container: LinearLayout
     var label_month: TextView
@@ -24,7 +26,6 @@ class MonthViewHolder(
     var mYear: Int = 0
 
     init {
-
         (itemView.layoutParams as RecyclerView.LayoutParams).setMargins(
             0, 0, 0,
             attrs.monthDividerSize
@@ -33,16 +34,17 @@ class MonthViewHolder(
         mContext = itemView.context
         label_month = itemView.findViewById(R.id.label_month)
         label_month.layoutParams.height = attrs.monthLabelHeight
-        label_month.setTextColor(attrs.monthLabelColor)
+        label_month.setTextAppearance(mContext, attrs.monthTextAppearanceId)
 
         weeks_container = itemView.findViewById(R.id.weeks_container)
         weeksColumns = ArrayList()
         val weekDayNames: LinearLayout = itemView.findViewById(R.id.label_days)
-        weekDayNames.getLayoutParams().height = attrs.weekdayHeight
+        weekDayNames.layoutParams.height = attrs.weekdayHeight
 
-        for (i in 0 until weekDayNames.getChildCount()) {
-            weekDayNames.getChildAt(i).getLayoutParams().width = attrs.dayWidth
-            (weekDayNames.getChildAt(i) as TextView).setTextColor(attrs.weekdayLabelColor)
+        for (i in 0 until weekDayNames.childCount) {
+            weekDayNames.getChildAt(i).layoutParams.width = attrs.dayWidth
+
+            (weekDayNames.getChildAt(i) as TextView).setTextAppearance(mContext, attrs.weekDayTextAppearanceId)
         }
     }
 
@@ -71,28 +73,30 @@ class MonthViewHolder(
 
         val inflater = LayoutInflater.from(mContext)
 
-        var tv_dayValue: TextView
+        var tvDay: TextView
         var container: View
         for (i in 0..6) {
             container = inflater.inflate(R.layout.day_view, linearLayout, false)
             container.tag = i
             container.layoutParams.width = attrs.dayWidth
 
-            val event_circle: View = container.findViewById(R.id.circle)
-            val today_circle: View = container.findViewById(R.id.today_circle)
+            val eventCircleView: View = container.findViewById(R.id.circle)
+            val todayCircleView: View = container.findViewById(R.id.today_circle)
 
-            (event_circle.background as GradientDrawable).setColor(attrs.eventCircleColor)
-            (today_circle.background as GradientDrawable).setColor(attrs.todayCircleColor)
+            (eventCircleView.background as GradientDrawable).setColor(attrs.eventCircleColor)
+            (todayCircleView.background as GradientDrawable).setColor(attrs.todayCircleColor)
 
-            today_circle.layoutParams.width = attrs.todayCircleSize
-            today_circle.layoutParams.height = attrs.todayCircleSize
+            todayCircleView.layoutParams.width = attrs.todayCircleSize
+            todayCircleView.layoutParams.height = attrs.todayCircleSize
 
-            tv_dayValue = container.findViewById(R.id.tv_day)
-            tv_dayValue.layoutParams.width = attrs.todayCircleSize
-            tv_dayValue.layoutParams.height = attrs.todayCircleSize
+            tvDay = container.findViewById(R.id.tv_day)
+            tvDay.setTextAppearance(mContext, attrs.dateTextAppearanceId)
+
+            tvDay.layoutParams.width = attrs.todayCircleSize
+            tvDay.layoutParams.height = attrs.todayCircleSize
 
             container.setOnClickListener { view ->
-                val day = view.tag as Int//Integer.parseInt(((TextView)view).getText().toString());
+                val day = view.tag as Int
                 if (day > 0) {
                     mOnDayClickListener.onClick(day, mMonth, mYear, false)
                 }
@@ -100,7 +104,7 @@ class MonthViewHolder(
 
             linearLayout.addView(container)
 
-            columns[i] = WeekDayView(container, tv_dayValue, event_circle, today_circle)
+            columns[i] = WeekDayView(container, tvDay, eventCircleView, todayCircleView)
         }
         weeksColumns.add(columns)
     }
@@ -111,7 +115,6 @@ class MonthViewHolder(
         var v_event_circle: View,
         var v_today_circle: View
     ) {
-
         init {
             this.v_event_circle.visibility = View.INVISIBLE
             this.v_today_circle.visibility = View.INVISIBLE

@@ -14,11 +14,8 @@
             app:eventCircleColor="#DB3A43"
             app:monthDividerSize="16dp"
             app:monthLabelHeight="24dp"
-            app:monthLabelSize="16sp"
-            app:monthLabelColor="#1919E4"
             app:todayCircleColor="@color/colorPrimary"
             app:todayCircleSize="30dp"
-            app:weekdayNameLabelColor="#1919E4"
             app:weekdayNameHeight="32dp"/>
 
     <android.support.design.widget.FloatingActionButton

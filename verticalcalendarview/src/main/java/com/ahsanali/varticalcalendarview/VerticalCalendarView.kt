@@ -13,7 +13,7 @@ import com.ahsanali.varticalcalendarview.adapters.VerticalCalendarAdapter
 
 class VerticalCalendarView : FrameLayout {
 
-    private var rl_calendar: RecyclerView? = null
+    private var rvCalendar: RecyclerView? = null
     private var mLayoutManager: RecyclerView.LayoutManager? = null
     private var mCalendarAdapter: VerticalCalendarAdapter? = null
     private var mOnDayClickListener: OnDayClickListener? = null
@@ -46,20 +46,20 @@ class VerticalCalendarView : FrameLayout {
         val content = layoutInflater.inflate(R.layout.calendar_view, null, false)
         addView(content)
 
-        rl_calendar = findViewById(R.id.rl_calendar)
+        rvCalendar = findViewById(R.id.rl_calendar)
         mLayoutManager = LinearLayoutManager(context)
-        rl_calendar?.layoutManager = mLayoutManager
+        rvCalendar?.layoutManager = mLayoutManager
 
         setAdapter()
 
         mLayoutManager?.scrollToPosition(3)
 
-        rl_calendar?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        rvCalendar?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                visibleItemCount = recyclerView.getChildCount()
-                totalItemCount = mCalendarAdapter!!.getItemCount()
+                visibleItemCount = recyclerView.childCount
+                totalItemCount = mCalendarAdapter!!.itemCount
                 firstVisibleItem = (mLayoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
 
                 if (loading) {
@@ -103,23 +103,6 @@ class VerticalCalendarView : FrameLayout {
         ).toInt()
 
         val typedValue = TypedValue()
-
-        a.getValue(R.styleable.VerticalCalendarView_weekdayNameLabelColor, typedValue)
-
-        if (typedValue.type == TypedValue.TYPE_REFERENCE) {
-            calendarAttrs.weekdayLabelColor = ContextCompat.getColor(
-                context,
-                a.getResourceId(
-                    R.styleable.VerticalCalendarView_weekdayNameLabelColor,
-                    R.color.default_LabelColor
-                )
-            )
-        } else {
-            calendarAttrs.weekdayLabelColor = a.getColor(
-                R.styleable.VerticalCalendarView_weekdayNameLabelColor,
-                ContextCompat.getColor(context, R.color.default_LabelColor)
-            )
-        }
 
         calendarAttrs.dayHeight = a.getDimension(
             R.styleable.VerticalCalendarView_dayHeight,
@@ -174,45 +157,54 @@ class VerticalCalendarView : FrameLayout {
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48f, displayMetrics)
         ).toInt()
 
-        calendarAttrs.monthLabelSize = a.getDimension(
-            R.styleable.VerticalCalendarView_monthLabelSize,
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14f, displayMetrics)
-        )
-
         calendarAttrs.monthLabelHeight = a.getDimension(
             R.styleable.VerticalCalendarView_monthLabelHeight,
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, displayMetrics)
         ).toInt()
 
-        a.getValue(R.styleable.VerticalCalendarView_monthLabelColor, typedValue)
-
-        if (typedValue.type == TypedValue.TYPE_REFERENCE) {
-            calendarAttrs.monthLabelColor = ContextCompat.getColor(
-                context,
-                a.getResourceId(R.styleable.VerticalCalendarView_monthLabelColor, R.color.default_LabelColor)
+        setWeekDayTextAppearance(
+            a.getResourceId(
+                R.styleable.VerticalCalendarView_weekDayTextAppearance,
+                R.style.TextAppearance_VerticalCalendar_WeekDay
             )
+        )
 
-        } else {
-            calendarAttrs.monthLabelColor = a.getColor(
-                R.styleable.VerticalCalendarView_monthLabelColor,
-                ContextCompat.getColor(context, R.color.default_LabelColor)
+        setDateTextAppearance(
+            a.getResourceId(
+                R.styleable.VerticalCalendarView_dateTextAppearance,
+                R.style.TextAppearance_VerticalCalendar_Date
             )
-        }
+        )
 
+        setMonthTextAppearance(
+            a.getResourceId(
+                R.styleable.VerticalCalendarView_monthTextAppearance,
+                R.style.TextAppearance_VerticalCalendar_Month
+            )
+        )
         a.recycle()
+    }
+
+    fun setDateTextAppearance(taId: Int) {
+        calendarAttrs.dateTextAppearanceId = taId
+    }
+
+    fun setWeekDayTextAppearance(taId: Int) {
+        calendarAttrs.weekDayTextAppearanceId = taId
+    }
+
+    private fun setMonthTextAppearance(taId: Int) {
+        calendarAttrs.monthTextAppearanceId = taId
     }
 
     private fun setAdapter() {
         mCalendarAdapter = VerticalCalendarAdapter(context, calendarAttrs)
-        rl_calendar!!.adapter = mCalendarAdapter
+        rvCalendar?.adapter = mCalendarAdapter
 
-        mCalendarAdapter!!.setOnDayClickListener(object : OnDayClickListener {
+        mCalendarAdapter?.setOnDayClickListener(object : OnDayClickListener {
 
             override fun onClick(day: Int, month: Int, year: Int, hasEvent: Boolean) {
-
-                if (mOnDayClickListener != null) {
-                    mOnDayClickListener!!.onClick(day, month, year, hasEvent)
-                }
+                mOnDayClickListener?.onClick(day, month, year, hasEvent)
             }
         })
     }
@@ -236,18 +228,19 @@ class VerticalCalendarView : FrameLayout {
     }
 
     inner class Attributes {
+
+        var monthTextAppearanceId = 0
+        var dateTextAppearanceId = 0
+        var weekDayTextAppearanceId = 0
+
+        var monthLabelHeight: Int = 0
         var weekdayHeight: Int = 0
-        var weekdayLabelColor: Int = 0
 
         var dayWidth: Int = 0
         var dayHeight: Int = 0
 
         var todayCircleColor: Int = 0
         var todayCircleSize: Int = 0
-
-        var monthLabelSize: Float = 0.toFloat()
-        var monthLabelHeight: Int = 0
-        var monthLabelColor: Int = 0
 
         var monthDividerSize: Int = 0
 
