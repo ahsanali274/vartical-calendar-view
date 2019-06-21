@@ -99,24 +99,24 @@ class VerticalCalendarView : FrameLayout {
 
         calendarAttrs.weekdayHeight = a.getDimension(
             R.styleable.VerticalCalendarView_weekdayNameHeight,
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24.toFloat(), displayMetrics)
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, displayMetrics)
         ).toInt()
 
         val typedValue = TypedValue()
 
         calendarAttrs.dayHeight = a.getDimension(
             R.styleable.VerticalCalendarView_dayHeight,
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48.toFloat(), displayMetrics)
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48f, displayMetrics)
         ).toInt()
 
         calendarAttrs.dayWidth = a.getDimension(
             R.styleable.VerticalCalendarView_dayWidth,
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48.toFloat(), displayMetrics)
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48f, displayMetrics)
         ).toInt()
 
         calendarAttrs.todayCircleSize = a.getDimension(
             R.styleable.VerticalCalendarView_todayCircleSize,
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30.toFloat(), displayMetrics)
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30f, displayMetrics)
         ).toInt()
 
         a.getValue(R.styleable.VerticalCalendarView_todayCircleColor, typedValue)
@@ -233,17 +233,17 @@ class VerticalCalendarView : FrameLayout {
         var dateTextAppearanceId = 0
         var weekDayTextAppearanceId = 0
 
-        var monthLabelHeight: Int = 0
-        var weekdayHeight: Int = 0
+        var monthLabelHeight = 0
+        var weekdayHeight = 0
 
-        var dayWidth: Int = 0
-        var dayHeight: Int = 0
+        var dayWidth = 0
+        var dayHeight = 0
 
-        var todayCircleColor: Int = 0
-        var todayCircleSize: Int = 0
+        var todayCircleColor = 0
+        var todayCircleSize = 0
 
-        var monthDividerSize: Int = 0
+        var monthDividerSize = 0
 
-        var eventCircleColor: Int = 0
+        var eventCircleColor = 0
     }
 }

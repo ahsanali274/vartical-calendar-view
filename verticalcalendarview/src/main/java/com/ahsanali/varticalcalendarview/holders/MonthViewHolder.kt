@@ -22,8 +22,8 @@ class MonthViewHolder(
     private val weeksContainer: LinearLayout
     var tvMonth: TextView
     var weeksColumns: ArrayList<Array<WeekDayView?>>
-    var mMonth: Int = 0
-    var mYear: Int = 0
+    var mMonth = 0
+    var mYear = 0
 
     init {
         (itemView.layoutParams as RecyclerView.LayoutParams).setMargins(0, 0, 0, attrs.monthDividerSize)

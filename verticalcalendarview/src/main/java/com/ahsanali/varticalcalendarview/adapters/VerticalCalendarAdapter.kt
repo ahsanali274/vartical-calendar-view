@@ -28,11 +28,11 @@ class VerticalCalendarAdapter(
     private val startMonth: Int
     private val today: Int
 
-    private var earlyMonthLoaded: Int = 0
-    private var earlyYearLoaded: Int = 0
+    private var earlyMonthLoaded = 0
+    private var earlyYearLoaded = 0
 
-    private var laterMonthLoaded: Int = 0
-    private var laterYearLoaded: Int = 0
+    private var laterMonthLoaded = 0
+    private var laterYearLoaded = 0
 
     private val minYearLimit: Int
     private val maxYearLimit: Int
