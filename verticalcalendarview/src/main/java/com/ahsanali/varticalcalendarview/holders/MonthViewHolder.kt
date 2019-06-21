@@ -19,24 +19,21 @@ class MonthViewHolder(
 ) : RecyclerView.ViewHolder(itemView) {
 
     private val mContext: Context
-    private val weeks_container: LinearLayout
-    var label_month: TextView
+    private val weeksContainer: LinearLayout
+    var tvMonth: TextView
     var weeksColumns: ArrayList<Array<WeekDayView?>>
     var mMonth: Int = 0
     var mYear: Int = 0
 
     init {
-        (itemView.layoutParams as RecyclerView.LayoutParams).setMargins(
-            0, 0, 0,
-            attrs.monthDividerSize
-        )
+        (itemView.layoutParams as RecyclerView.LayoutParams).setMargins(0, 0, 0, attrs.monthDividerSize)
 
         mContext = itemView.context
-        label_month = itemView.findViewById(R.id.label_month)
-        label_month.layoutParams.height = attrs.monthLabelHeight
-        label_month.setTextAppearance(mContext, attrs.monthTextAppearanceId)
+        tvMonth = itemView.findViewById(R.id.label_month)
+        tvMonth.layoutParams.height = attrs.monthLabelHeight
+        tvMonth.setTextAppearance(mContext, attrs.monthTextAppearanceId)
 
-        weeks_container = itemView.findViewById(R.id.weeks_container)
+        weeksContainer = itemView.findViewById(R.id.weeks_container)
         weeksColumns = ArrayList()
         val weekDayNames: LinearLayout = itemView.findViewById(R.id.label_days)
         weekDayNames.layoutParams.height = attrs.weekdayHeight
@@ -54,17 +51,14 @@ class MonthViewHolder(
         var layoutParams: LinearLayout.LayoutParams
         for (i in 0 until weekRowsCount) {
             linearLayout = LinearLayout(mContext)
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                attrs.dayHeight
-            )
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, attrs.dayHeight)
 
             linearLayout.layoutParams = layoutParams
             linearLayout.orientation = LinearLayout.HORIZONTAL
             linearLayout.gravity = Gravity.CENTER
             generateWeekColumns(linearLayout)
 
-            weeks_container.addView(linearLayout)
+            weeksContainer.addView(linearLayout)
         }
     }
 
@@ -111,13 +105,13 @@ class MonthViewHolder(
 
     inner class WeekDayView internal constructor(
         var container: View,
-        var tv_value: TextView,
-        var v_event_circle: View,
-        var v_today_circle: View
+        var tvvalue: TextView,
+        var viewEventCircle: View,
+        var viewTodayCircle: View
     ) {
         init {
-            this.v_event_circle.visibility = View.INVISIBLE
-            this.v_today_circle.visibility = View.INVISIBLE
+            this.viewEventCircle.visibility = View.INVISIBLE
+            this.viewTodayCircle.visibility = View.INVISIBLE
         }
     }
 }

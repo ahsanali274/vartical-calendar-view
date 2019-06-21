@@ -3,7 +3,6 @@ package com.ahsanali.varticalcalendarview.adapters
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -47,10 +46,10 @@ class VerticalCalendarAdapter(
     }
 
     init {
-        val c = Calendar.getInstance()
-        startYear = c.get(Calendar.YEAR)
-        startMonth = c.get(Calendar.MONTH) + 1
-        today = c.get(Calendar.DAY_OF_MONTH)
+        val calendar = Calendar.getInstance()
+        startYear = calendar.get(Calendar.YEAR)
+        startMonth = calendar.get(Calendar.MONTH) + 1
+        today = calendar.get(Calendar.DAY_OF_MONTH)
 
         mMonths = ArrayList()
         mEvents = HashMap()
@@ -60,8 +59,8 @@ class VerticalCalendarAdapter(
         laterYearLoaded = startYear
         laterMonthLoaded = startMonth
 
-        minYearLimit = startYear - 20
-        maxYearLimit = startYear + 20
+        minYearLimit = startYear - 100
+        maxYearLimit = startYear + 100
 
         mMonths.add(Month(startMonth, startYear))
         getPreviousMonth()
@@ -97,36 +96,36 @@ class VerticalCalendarAdapter(
     }
 
     private fun setLabel(holder: MonthViewHolder, m: Month) {
-        holder.label_month.text = mMonthLabels[m.value - 1] + " " + m.year
+        holder.tvMonth.text = mMonthLabels[m.value - 1] + " " + m.year
     }
 
     private fun setWeeks(holder: MonthViewHolder, m: Month) {
         var weekColumns: Array<MonthViewHolder.WeekDayView?>
         var days: Array<Day>
         var container: View?
-        var tv_day: TextView?
-        var v_circle: View?
+        var tvDay: TextView?
+        var viewCircle: View?
 
         for (i in 0 until holder.weekRowsCount) {
             weekColumns = holder.weeksColumns.get(i)
             days = m.weeks[i].days
             for (j in 0..6) {
-                v_circle = weekColumns[j]?.v_event_circle
+                viewCircle = weekColumns[j]?.viewEventCircle
                 container = weekColumns[j]?.container
-                tv_day = weekColumns[j]?.tv_value
-                tv_day?.text = "" + days[j].value
+                tvDay = weekColumns[j]?.tvvalue
+                tvDay?.text = "" + days[j].value
 
                 container?.tag = days[j].value
                 container?.isClickable = days[j].value != 0
 
-                v_circle?.visibility = if (hasEvent(days[j].value, m.value, m.year)) VISIBLE else INVISIBLE
+                viewCircle?.visibility = if (hasEvent(days[j].value, m.value, m.year)) VISIBLE else INVISIBLE
 
                 if (m.year == startYear && m.value == startMonth && days[j].value == today) {
-                    tv_day?.setTextColor(Color.WHITE)
-                    weekColumns[j]?.v_today_circle?.visibility = VISIBLE
+                    tvDay?.setTextColor(Color.WHITE)
+                    weekColumns[j]?.viewTodayCircle?.visibility = VISIBLE
                 } else {
-                    tv_day?.setTextColor(if (days[j].value == 0) Color.TRANSPARENT else Color.BLACK)
-                    weekColumns[j]?.v_today_circle?.visibility = GONE
+                    tvDay?.setTextColor(if (days[j].value == 0) Color.TRANSPARENT else Color.BLACK)
+                    weekColumns[j]?.viewTodayCircle?.visibility = GONE
                 }
             }
         }
