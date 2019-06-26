@@ -1,7 +1,6 @@
 package com.ahsanali.varticalcalendarview.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -121,7 +120,7 @@ class VerticalCalendarAdapter(
                 viewCircle?.visibility = if (hasEvent(days[j].value, m.value, m.year)) VISIBLE else INVISIBLE
 
                 if (m.year == startYear && m.value == startMonth && days[j].value == today) {
-                    tvDay?.setTextColor(Color.WHITE)
+                    tvDay?.setTextColor(attrs.backgroundColor)
                     weekColumns[j]?.viewTodayCircle?.visibility = VISIBLE
                 } else {
                     tvDay?.visibility = if (days[j].value == 0) INVISIBLE else VISIBLE

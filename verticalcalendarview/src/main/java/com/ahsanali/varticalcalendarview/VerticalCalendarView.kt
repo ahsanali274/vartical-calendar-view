@@ -2,6 +2,8 @@ package com.ahsanali.varticalcalendarview
 
 import android.app.Service
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -152,6 +154,15 @@ class VerticalCalendarView : FrameLayout {
             )
         }
 
+
+        (background as? ColorDrawable?).let {
+            if (it != null) {
+                calendarAttrs.backgroundColor = it.color
+            }else{
+                calendarAttrs.backgroundColor = Color.WHITE
+            }
+        }
+
         calendarAttrs.monthDividerSize = a.getDimension(
             R.styleable.VerticalCalendarView_monthDividerSize,
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48f, displayMetrics)
@@ -228,6 +239,8 @@ class VerticalCalendarView : FrameLayout {
     }
 
     inner class Attributes {
+
+        var backgroundColor = 0
 
         var monthTextAppearanceId = 0
         var dateTextAppearanceId = 0

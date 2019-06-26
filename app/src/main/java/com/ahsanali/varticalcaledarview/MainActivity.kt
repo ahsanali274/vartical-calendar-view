@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         calendarView.setOnDayClickListener(object : VerticalCalendarView.OnDayClickListener {
             override fun onClick(day: Int, month: Int, year: Int, hasEvent: Boolean) {
                 Toast.makeText(
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
                     "$day/$month/$year hasEvent= $hasEvent",
                     Toast.LENGTH_SHORT
                 ).show()
+                calendarView.deleteEvent(day,month,year)
             }
         })
 
