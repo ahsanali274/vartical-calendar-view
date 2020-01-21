@@ -8,7 +8,7 @@ ext {
 
     kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    supportAppCompat = "com.android.support:appcompat-v7:$supportVersion"
-    recyclerviewV7 = "com.android.support:recyclerview-v7:$supportVersion"
-    supportDesign = "com.android.support:design:$supportVersion"
+    appCompat = 'androidx.appcompat:appcompat:1.0.0'
+    recyclerview = 'androidx.recyclerview:recyclerview:1.0.0'
+    materialDesign = 'com.google.android.material:material:1.0.0'
 }

@@ -1,7 +1,7 @@
 package com.ahsanali.varticalcalendarview.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -106,7 +106,7 @@ class VerticalCalendarAdapter(
         var viewCircle: View?
 
         for (i in 0 until holder.weekRowsCount) {
-            weekColumns = holder.weeksColumns.get(i)
+            weekColumns = holder.weeksColumns[i]
             days = m.weeks[i].days
             for (j in 0..6) {
                 viewCircle = weekColumns[j]?.viewEventCircle

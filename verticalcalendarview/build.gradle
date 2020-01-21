@@ -25,8 +25,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation rootProject.ext.kotlin
-    implementation rootProject.ext.supportAppCompat
-    implementation rootProject.ext.recyclerviewV7
+    implementation rootProject.ext.appCompat
+    implementation rootProject.ext.recyclerview
 }
 repositories {
     mavenCentral()

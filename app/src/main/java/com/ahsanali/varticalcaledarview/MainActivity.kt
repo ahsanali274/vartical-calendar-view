@@ -2,9 +2,9 @@ package com.ahsanali.varticalcaledarview
 
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.widget.DatePicker
 import android.widget.Toast
 import com.ahsanali.varticalcalendarview.VerticalCalendarView
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+    class DatePickerFragment : androidx.fragment.app.DialogFragment(), DatePickerDialog.OnDateSetListener {
 
         private var calendarView: VerticalCalendarView? = null
 
