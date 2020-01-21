@@ -2,6 +2,7 @@ package com.ahsanali.varticalcalendarview.holders
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -31,8 +32,7 @@ class MonthViewHolder(
         mContext = itemView.context
         tvMonth = itemView.findViewById(R.id.label_month)
         tvMonth.layoutParams.height = attrs.monthLabelHeight
-        tvMonth.setTextAppearance(mContext, attrs.monthTextAppearanceId)
-
+        TextViewCompat.setTextAppearance(tvMonth, attrs.monthTextAppearanceId)
         weeksContainer = itemView.findViewById(R.id.weeks_container)
         weeksColumns = ArrayList()
         val weekDayNames: LinearLayout = itemView.findViewById(R.id.label_days)
@@ -41,7 +41,7 @@ class MonthViewHolder(
         for (i in 0 until weekDayNames.childCount) {
             weekDayNames.getChildAt(i).layoutParams.width = attrs.dayWidth
 
-            (weekDayNames.getChildAt(i) as TextView).setTextAppearance(mContext, attrs.weekDayTextAppearanceId)
+            TextViewCompat.setTextAppearance((weekDayNames.getChildAt(i) as TextView), attrs.weekDayTextAppearanceId)
         }
     }
 
@@ -84,7 +84,7 @@ class MonthViewHolder(
             todayCircleView.layoutParams.height = attrs.todayCircleSize
 
             tvDay = container.findViewById(R.id.tv_day)
-            tvDay.setTextAppearance(mContext, attrs.dateTextAppearanceId)
+            TextViewCompat.setTextAppearance(tvDay, attrs.dateTextAppearanceId)
 
             tvDay.layoutParams.width = attrs.todayCircleSize
             tvDay.layoutParams.height = attrs.todayCircleSize
