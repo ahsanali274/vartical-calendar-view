@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.TextViewCompat
 import com.ahsanali.varticalcalendarview.R
 import com.ahsanali.varticalcalendarview.VerticalCalendarView
 import com.ahsanali.varticalcalendarview.data.Day
@@ -23,9 +24,9 @@ class VerticalCalendarAdapter(
     private val mMonthLabels: List<String> = listOf(*mContext.resources.getStringArray(R.array.months))
     private val mMonths: ArrayList<Month>
 
-    private val startYear: Int
-    private val startMonth: Int
-    private val today: Int
+    private val thisYear: Int
+    private val thisMonth: Int
+    private val thisDay: Int
 
     private var earlyMonthLoaded = 0
     private var earlyYearLoaded = 0
@@ -46,22 +47,22 @@ class VerticalCalendarAdapter(
 
     init {
         val calendar = Calendar.getInstance()
-        startYear = calendar.get(Calendar.YEAR)
-        startMonth = calendar.get(Calendar.MONTH) + 1
-        today = calendar.get(Calendar.DAY_OF_MONTH)
+        thisYear = calendar.get(Calendar.YEAR)
+        thisMonth = calendar.get(Calendar.MONTH) + 1
+        thisDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         mMonths = ArrayList()
         mEvents = HashMap()
 
-        earlyMonthLoaded = startMonth
-        earlyYearLoaded = startYear
-        laterYearLoaded = startYear
-        laterMonthLoaded = startMonth
+        earlyMonthLoaded = thisMonth
+        earlyYearLoaded = thisYear
+        laterYearLoaded = thisYear
+        laterMonthLoaded = thisMonth
 
-        minYearLimit = startYear - 100
-        maxYearLimit = startYear + 100
+        minYearLimit = thisYear - 100
+        maxYearLimit = thisYear + 100
 
-        mMonths.add(Month(startMonth, startYear))
+        mMonths.add(Month(thisMonth, thisYear))
         getPreviousMonth()
         getNextMonths()
     }
@@ -105,10 +106,10 @@ class VerticalCalendarAdapter(
         var tvDay: TextView?
         var viewCircle: View?
 
-        for (i in 0 until holder.weekRowsCount) {
+        (0 until holder.weekRowsCount).forEach { i ->
             weekColumns = holder.weeksColumns[i]
             days = m.weeks[i].days
-            for (j in 0..6) {
+            (0..6).forEach { j ->
                 viewCircle = weekColumns[j]?.viewEventCircle
                 container = weekColumns[j]?.container
                 tvDay = weekColumns[j]?.tvvalue
@@ -119,10 +120,11 @@ class VerticalCalendarAdapter(
 
                 viewCircle?.visibility = if (hasEvent(days[j].value, m.value, m.year)) VISIBLE else INVISIBLE
 
-                if (m.year == startYear && m.value == startMonth && days[j].value == today) {
+                if (m.year == thisYear && m.value == thisMonth && days[j].value == thisDay) {
                     tvDay?.setTextColor(attrs.backgroundColor)
                     weekColumns[j]?.viewTodayCircle?.visibility = VISIBLE
                 } else {
+                    tvDay?.let { TextViewCompat.setTextAppearance(it, attrs.weekDayTextAppearanceId) }
                     tvDay?.visibility = if (days[j].value == 0) INVISIBLE else VISIBLE
                     weekColumns[j]?.viewTodayCircle?.visibility = GONE
                 }
